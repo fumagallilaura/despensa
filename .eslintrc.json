@@ -1,19 +1,18 @@
 {
-    "env": {
-        "es2021": true,
-        "node": true
-    },
-    "extends": "standard-with-typescript",
-    "overrides": [
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-      "project": "./tsconfig.json",
-      "sourceType": "module"
-    },
-    "rules": {
-      "@typescript-eslint/strict-boolean-expressions": "off",
-      "@typescript-eslint/consistent-type-definitions": "off",
-      "@typescript-eslint/no-misused-promises": "off"
-    }
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": "standard-with-typescript",
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-misused-promises": "off"
+  }
 }

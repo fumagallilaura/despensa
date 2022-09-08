@@ -1,32 +1,33 @@
 import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
-
-import router from '../routes'
+import routes from '../routes'
 
 class App {
-  public express: express.Application
+  public app: express.Express
 
-  public constructor () {
-    this.express = express()
+  constructor () {
+    this.app = express()
 
-    this.middlewares()
-    this.database().catch((error) => console.log(error))
-    this.routes()
+    this.config()
   }
 
-  private middlewares (): void {
-    this.express.use(express.json())
-    this.express.use(cors())
+  private config (): void {
+    const accessControl: express.RequestHandler = (_req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*')
+      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH')
+      res.header('Access-Control-Allow-Headers', '*')
+      next()
+    }
+
+    this.app.use(express.json())
+    this.app.use(accessControl)
+    this.app.use(routes)
   }
 
-  private async database (): Promise<void> {
-    await mongoose.connect('mongodb://localhost:27017/todo-next')
-  }
-
-  private routes (): void {
-    this.express.use(router)
+  public start (PORT: string | number): void {
+    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`))
   }
 }
 
-export default new App().express
+export { App }
+
+export const { app } = new App()
